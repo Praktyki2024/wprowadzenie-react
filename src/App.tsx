@@ -1,7 +1,9 @@
-import { useEffect, useMemo, useState } from 'react';
+import { createContext, useEffect, useMemo, useState } from 'react';
 import './App.css';
 import Hello from './components/Hello';
 import { nauczyciel as nauczycielJSON} from './data/nauczyciele';
+
+export const NauczycielContext = createContext('');
 
 function App() {
   const [nauczyciel, setNauczyciel] = useState(nauczycielJSON)
@@ -12,7 +14,9 @@ function App() {
   const zmienImie = (imie: string) => setNauczyciel({...nauczyciel, imie})
   return (
     <>
+    <NauczycielContext.Provider value="Marek">
       <Hello imie={nauczyciel.imie} uczniowie={imionaUczniow} onDodajUczen={dodajUczen} onZmienImie={zmienImie}/>
+    </NauczycielContext.Provider>
     </>
   );
 }
